@@ -1,7 +1,11 @@
-.example-icon {
-  padding: 0 14px;
+mat-card {
+  max-width: 400px;
+  margin: 2em auto;
+  text-align: center;
 }
-
-.example-spacer {
-  flex: 1 1 auto;
+.signin-content {
+  padding: 60px 1rem;
+}
+.full-width-input {
+  width: 100%;
 }

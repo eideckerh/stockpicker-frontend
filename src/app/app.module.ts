@@ -8,22 +8,29 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {CustomMaterialModule} from "./core/material.module";
 import {AppRoutingModule} from "./core/app.routing.module";
 import {HttpClientModule} from "@angular/common/http";
-import {JwtInterceptor} from "./core/jwt.interceptor";
+import {ReactiveFormsModule} from "@angular/forms";
+import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './header/header.component';
+import {AuthGuard} from "./core/auth/auth.guard";
+import {AuthService} from "./core/auth/auth.service";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    UserComponent
+    UserComponent,
+    HomeComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
     CustomMaterialModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [JwtInterceptor],
+  providers: [AuthGuard, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

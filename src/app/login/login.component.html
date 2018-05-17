@@ -1,11 +1,24 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <span><img src="./assets/logo.png"></span>
-    <span class="example-fill-remaining-space"></span>
-    <span class="align-center"></span>
-    <span class="example-spacer"></span>
-
-    <button mat-button>About</button>
-    <button mat-button>Contact</button>
-  </mat-toolbar-row>
-</mat-toolbar>
+<div class="signin-content">
+  <mat-card>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <p>Bitte geben Sie Ihren Nutzernamen und Passwort ein, um sich anzumelden.</p>
+        <mat-form-field class="full-width-input">
+          <input matInput placeholder="Benutzer"
+                 formControlName="userName" required>
+          <mat-error *ngIf="isFieldInvalid('userName')">
+            Bitte überprüfen Sie den Nutzernamen
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+          <input matInput type="password" placeholder="Passwort"
+                 formControlName="password" required>
+          <mat-error *ngIf="isFieldInvalid('userName')">
+            Bitte überprüfen Sie das Passwort
+          </mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Anmelden</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
