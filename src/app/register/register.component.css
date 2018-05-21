@@ -1,0 +1,20 @@
+mat-card {
+  max-width: 400px;
+  margin: 2em auto;
+  text-align: center;
+}
+.register-content {
+  padding: 60px 1rem;
+}
+
+.full-width-input {
+  width: 100%;
+}
+
+.button-group button {
+  margin: 5px 10px;
+}
+
+mat-form-field {
+  margin: 1px 5px;
+}

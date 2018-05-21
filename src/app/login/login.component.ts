@@ -19,16 +19,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      userName: ['', Validators.required],
-      password: ['', Validators.required]
+      username: ['', Validators.minLength(4)],
+      password: ['',  Validators.minLength(6)]
     });
-  }
-
-  isFieldInvalid(field: string) {
-    return (
-      (!this.form.get(field).valid && this.form.get(field).touched) ||
-      (this.form.get(field).untouched && this.formSubmitAttempt)
-    );
   }
 
   onSubmit() {

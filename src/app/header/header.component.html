@@ -2,10 +2,11 @@
   <span>
     <img src="assets/logo.png" class="logo">
   </span>
-  <p>WStockpicker</p>
+  <p>Stockpicker</p>
   <span class="fill-remaining-space"></span>
   <button *ngIf="isLoggedIn | async" mat-button>Konto</button>
   <button *ngIf="isLoggedIn | async" mat-button>Handel</button>
   <button *ngIf="!(isLoggedIn | async)" mat-button routerLink="login">Anmelden</button>
+  <button *ngIf="!(isLoggedIn | async)" mat-button routerLink="register">Registrieren</button>
   <button *ngIf="isLoggedIn | async" mat-button (click)="onLogout()">Abmelden</button>
 </mat-toolbar>
