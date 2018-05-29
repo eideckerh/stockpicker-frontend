@@ -9,8 +9,14 @@ import {Chart} from 'chart.js'
 })
 export class StockComponent implements OnInit {
 
+  public chart: Chart = [];
   public symbole: string = '';
-  public stockData: Map<Date, number> = new Map<Date, number>();
+
+  public stockDates: string[] = [];
+  public stockClosingValues: number[] = [];
+  public stockHighValue: number[] = [];
+  public stockVolumeValue: number[] = [];
+
 
   constructor(private stockService: StockService) {
   }
@@ -21,19 +27,43 @@ export class StockComponent implements OnInit {
       let timeSeries = res['Time Series (Daily)'];
 
       Object.keys(timeSeries).forEach((dateString) => {
-        this.stockData.set(new Date(dateString), timeSeries[dateString]['4. close']);
+        this.stockDates.push(this.convertDateToString(new Date(dateString)));
+        this.stockHighValue.push(timeSeries[dateString]['2. high']);
+        this.stockClosingValues.push(timeSeries[dateString]['4. close']);
+        this.stockVolumeValue.push(timeSeries[dateString]['6. volume']);
       })
 
-      this.stockData.forEach((value, key) => {
-        console.log('Value: ' + value);
-        console.log('Key: ' + key);
+      this.chart = new Chart('canvas', {
+        type: 'line',
+        data: {
+          labels: this.stockDates,
+          datasets: [
+            {
+              label: 'Börsenschlusskurs',
+              data: this.stockClosingValues,
+              borderColor: '#3f51b5',
+              fill: false
+            },
+            {
+              label: 'Höchstkurs',
+              data: this.stockHighValue,
+              borderColor: '#71dbff',
+              fill: false
+            }
+          ]
+        },
+        options: {
+          scales: {
+            xAxes: [{distribution: 'series', display: true}],
+            yAxes: [{display: true, labelString: 'Price ($)'}]
+          }
+        }
       })
     })
-
   }
 
   private convertDateToString(date: Date): string {
-    return date.toLocaleTimeString('de', {
+    return date.toLocaleDateString('de', {
       year: 'numeric',
       month: 'short',
       day: 'numeric'
