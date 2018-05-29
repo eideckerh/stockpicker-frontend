@@ -9,11 +9,13 @@ import {CustomMaterialModule} from "./core/material.module";
 import {AppRoutingModule} from "./core/app.routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
-import { HomeComponent } from './home/home.component';
-import { HeaderComponent } from './header/header.component';
+import {HomeComponent} from './home/home.component';
+import {HeaderComponent} from './header/header.component';
 import {AuthGuard} from "./core/auth/auth.guard";
 import {AuthService} from "./core/auth/auth.service";
-import { RegisterComponent } from './register/register.component';
+import {RegisterComponent} from './register/register.component';
+import {StockService} from "./stock/stock.service";
+import { StockComponent } from './stock/stock.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { RegisterComponent } from './register/register.component';
     UserComponent,
     HomeComponent,
     HeaderComponent,
-    RegisterComponent
+    RegisterComponent,
+    StockComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,7 @@ import { RegisterComponent } from './register/register.component';
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [AuthGuard, AuthService],
+  providers: [AuthGuard, AuthService, StockService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -6,11 +6,13 @@ import {HomeComponent} from "../home/home.component";
 import {AuthGuard} from "./auth/auth.guard";
 import {Register} from "ts-node";
 import {RegisterComponent} from "../register/register.component";
+import {StockComponent} from "../stock/stock.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'stock', component: StockComponent}
 ];
 
 @NgModule({
