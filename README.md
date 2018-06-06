@@ -1,6 +1,11 @@
 # StockpickerFrontend
 
-A simple web-app based on angular that let's you invest into stocks with toy money. This project contains the frontend code of the application. 
+A simple web-app based on angular that let's you invest into stocks with toy money. This project contains the frontend code of the application.
+
+The Framework used for development is [Angular Version 6](https://angular.io/). 
+
+Charts are based on [Chart.js](https://github.com/chartjs/Chart.js).
+  
 
 ## Development server
 
