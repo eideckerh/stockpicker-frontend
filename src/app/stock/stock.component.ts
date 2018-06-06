@@ -11,7 +11,8 @@ export class StockComponent implements OnInit {
 
   @Input()
   public symbol: string;
-  public chart: Chart;
+
+  public chart: Chart = [];
   public stockDates: string[] = [];
   public stockClosingValues: number[] = [];
   public stockHighValue: number[] = [];
@@ -21,18 +22,21 @@ export class StockComponent implements OnInit {
   constructor(private stockService: StockService) {
   }
 
+
   ngOnInit() {
     this.stockService.stockData(this.symbol).subscribe(res => {
-      this.symbol = res['Meta Data']['2. Symbol'];
+
       let timeSeries = res['Time Series (Daily)'];
+      console.log(this.symbol);
 
       Object.keys(timeSeries).forEach((dateString) => {
-        this.stockDates.push(this.convertDateToString(new Date(dateString)));
-        this.stockHighValue.push(timeSeries[dateString]['2. high']);
-        this.stockClosingValues.push(timeSeries[dateString]['4. close']);
-        this.stockVolumeValue.push(timeSeries[dateString]['6. volume']);
+        this.stockDates.unshift(this.convertDateToString(new Date(dateString)));
+        this.stockHighValue.unshift(timeSeries[dateString]['2. high']);
+        this.stockClosingValues.unshift(timeSeries[dateString]['4. close']);
+        this.stockVolumeValue.unshift(timeSeries[dateString]['6. volume']);
       })
-      this.chart = new Chart('canvas', {
+
+      this.chart = new Chart(this.symbol, {
         type: 'line',
         data: {
           labels: this.stockDates,
@@ -58,6 +62,7 @@ export class StockComponent implements OnInit {
           }
         }
       })
+
     })
   }
 

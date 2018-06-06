@@ -4,6 +4,7 @@ p {
 
 
 mat-card {
-  max-width: 800px;
-  margin: 1px;
+  margin: 5px;
+  float: left;
+  width: 650px;
 }
