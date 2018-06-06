@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {StockService} from "./stock.service";
 import {Chart} from 'chart.js'
 
@@ -9,10 +9,12 @@ import {Chart} from 'chart.js'
 })
 export class StockComponent implements OnInit {
 
+
   @Input()
   public symbol: string;
 
   public chart: Chart = [];
+  public chartIsLoaded: boolean = false;
   public stockDates: string[] = [];
   public stockClosingValues: number[] = [];
   public stockHighValue: number[] = [];
@@ -62,7 +64,7 @@ export class StockComponent implements OnInit {
           }
         }
       })
-
+      this.chartIsLoaded = true;
     })
   }
 
@@ -73,5 +75,6 @@ export class StockComponent implements OnInit {
       day: 'numeric'
     });
   }
+
 
 }

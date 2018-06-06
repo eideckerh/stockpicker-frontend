@@ -1,7 +1,13 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from '@angular/common';
-import {MatCardModule, MatInputModule, MatToolbarModule} from "@angular/material";
-import {MatButtonModule} from "@angular/material/button";
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatInputModule,
+  MatProgressSpinnerModule,
+  MatTabsModule,
+  MatToolbarModule
+} from "@angular/material";
 
 
 @NgModule({
@@ -12,7 +18,9 @@ import {MatButtonModule} from "@angular/material/button";
     MatToolbarModule,
     MatCardModule,
     MatInputModule,
-    MatButtonModule],
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    MatTabsModule],
 })
 export class CustomMaterialModule {
 }

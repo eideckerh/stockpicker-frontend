@@ -1,4 +1,4 @@
-<div *ngIf="chart">
+<div >
   <mat-card>
     <mat-card-content>
       <p>{{ symbol }}</p>
@@ -6,3 +6,12 @@
     </mat-card-content>
   </mat-card>
 </div>
+
+<ng-template #progress_spinner>
+    <mat-card>
+    <mat-card-content>
+      <p>Test</p>
+      <mat-spinner></mat-spinner>
+    </mat-card-content>
+  </mat-card>
+</ng-template>
