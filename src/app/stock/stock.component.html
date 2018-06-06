@@ -1,3 +1,8 @@
 <div *ngIf="chart">
-  <canvas id="canvas">{{ chart }}</canvas>
+  <mat-card>
+    <mat-card-content>
+      <p>{{ symbol }}</p>
+      <canvas id="canvas">{{ chart }}</canvas>
+    </mat-card-content>
+  </mat-card>
 </div>
