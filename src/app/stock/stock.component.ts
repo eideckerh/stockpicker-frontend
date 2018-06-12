@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {StockService} from "./stock.service";
 import {Chart} from 'chart.js'
 
@@ -9,6 +9,7 @@ import {Chart} from 'chart.js'
 })
 export class StockComponent implements OnInit {
 
+  @ViewChild('canvas') canvas: ElementRef;
 
   @Input()
   public symbol: string;
@@ -38,7 +39,7 @@ export class StockComponent implements OnInit {
         this.stockVolumeValue.unshift(timeSeries[dateString]['6. volume']);
       })
 
-      this.chart = new Chart(this.symbol, {
+      this.chart = new Chart(this.canvas.nativeElement.getContext('2d'), {
         type: 'line',
         data: {
           labels: this.stockDates,
