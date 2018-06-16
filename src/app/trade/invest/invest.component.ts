@@ -22,7 +22,7 @@ export class InvestComponent implements OnInit {
       this.symbol = params['symbol'];
     })
     this.form = this.fb.group({
-      amount: ['', Validators.required],
+      amount: ['', Validators.pattern('[0-9]*')],
       tradeType: ['', Validators.required],
     });
   }
