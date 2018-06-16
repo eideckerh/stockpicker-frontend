@@ -8,7 +8,10 @@ import {StockService} from "../stock/stock.service";
 })
 export class TradeComponent implements OnInit {
 
+  public favoriteStockSymbols: string[];
+
   constructor(private stockService: StockService) {
+    this.favoriteStockSymbols = ['NVDA', 'MSFT', 'TSLA', 'BRK.A', 'TMUS'];
   }
 
   ngOnInit() {

@@ -18,6 +18,7 @@ import {StockService} from "./stock/stock.service";
 import {StockComponent} from './stock/stock.component';
 import {TradeComponent} from './trade/trade.component';
 import {AccountComponent} from './account/account.component';
+import { InvestComponent } from './trade/invest/invest.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {AccountComponent} from './account/account.component';
     RegisterComponent,
     StockComponent,
     TradeComponent,
-    AccountComponent
+    AccountComponent,
+    InvestComponent
   ],
   imports: [
     BrowserModule,

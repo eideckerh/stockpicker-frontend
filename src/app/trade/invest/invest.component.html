@@ -1,0 +1,22 @@
+<app-stock symbol={{symbol}}></app-stock>
+<mat-card>
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <button mat-raised-button color="warn" routerLink="/trade" type="button">Zurück</button>
+      <mat-form-field>
+        <mat-select placeholder="Geschäftsart" formControlName="tradeType" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let tradeType of tradeTypes" [value]="tradeType">
+            {{tradeType}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input matInput formControlName="amount" placeholder="Stück / Anzahl"
+               required>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">Bestätigen</button>
+    </form>
+  </mat-card-content>
+</mat-card>
+

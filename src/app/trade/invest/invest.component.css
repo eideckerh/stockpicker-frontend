@@ -1,0 +1,8 @@
+mat-card {
+}
+button[type="submit"] {
+  float: right;
+}
+form > * {
+  margin-left: 20px;
+}

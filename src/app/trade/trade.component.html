@@ -3,11 +3,9 @@
     <h1>Some tab content</h1>
   </mat-tab>
   <mat-tab label="Beliebte Aktien">
-    <app-stock symbol="NVDA"></app-stock>
-    <app-stock symbol="MSFT"></app-stock>
-    <app-stock symbol="TSLA"></app-stock>
-    <app-stock symbol="BRK.A"></app-stock>
-    <app-stock symbol="TMUS"></app-stock>
+    <div *ngFor="let symbol of favoriteStockSymbols">
+      <app-stock symbol={{symbol}} [routerLink]="['/invest', { symbol: symbol }]"></app-stock>
+    </div>
   </mat-tab>
 </mat-tab-group>
 
