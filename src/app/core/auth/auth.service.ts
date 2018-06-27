@@ -20,16 +20,18 @@ export class AuthService {
 
   login(user: User) {
     if (user.username !== '' && user.password != '') {
-      this.loggedIn.next(true);
-      let headers = new HttpHeaders();
-      headers.append("Authorization", "Basic " + btoa(user.username + ":" + user.password));
-      headers.append("Content-Type", "application/x-www-form-urlencoded");
-      let body = JSON.stringify({username: user.username, password: user.password})
+      let headers = new HttpHeaders({
+        'Authorization': 'Basic ' + btoa(user.username + ":" + user.password),
+        'Content-Type': 'application/x-www-form-urlencoded'
+      });
       console.log("performing request")
-      this.http.post('http://localhost:8080/login', body, {headers: headers}).subscribe(
-        result => console.log("test " + result.toString())
+      this.http.get('http://localhost:8080/login', {headers: headers}).subscribe(
+        result => {
+          if (result) {
+            this.loggedIn.next(true);
+          }
+        }
       )
-      this.router.navigate(['/']);
     }
   }
 
