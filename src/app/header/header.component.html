@@ -4,9 +4,9 @@
   </span>
   <p>Stockpicker</p>
   <span class="fill-remaining-space"></span>
-  <button *ngIf="isLoggedIn | async" mat-button routerLink="account">Konto</button>
-  <button *ngIf="isLoggedIn | async" mat-button routerLink="trade">Handel</button>
-  <button *ngIf="!(isLoggedIn | async)" mat-button routerLink="login">Anmelden</button>
-  <button *ngIf="!(isLoggedIn | async)" mat-button routerLink="register">Registrieren</button>
-  <button *ngIf="isLoggedIn | async" mat-button (click)="onLogout()">Abmelden</button>
+  <button *ngIf="isLoggedIn" mat-button routerLink="account">Konto</button>
+  <button *ngIf="isLoggedIn" mat-button routerLink="trade">Handel</button>
+  <button *ngIf="!isLoggedIn" mat-button routerLink="login">Anmelden</button>
+  <button *ngIf="!isLoggedIn" mat-button routerLink="register">Registrieren</button>
+  <button *ngIf="isLoggedIn" mat-button (click)="onLogout()">Abmelden</button>
 </mat-toolbar>

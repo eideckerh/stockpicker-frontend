@@ -7,7 +7,7 @@ import {UserComponent} from './user/user.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {CustomMaterialModule} from "./core/material.module";
 import {AppRoutingModule} from "./core/app.routing.module";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
 import {HomeComponent} from './home/home.component';
 import {HeaderComponent} from './header/header.component';
@@ -18,9 +18,16 @@ import {StockService} from "./stock/stock.service";
 import {StockComponent} from './stock/stock.component';
 import {TradeComponent} from './trade/trade.component';
 import {AccountComponent} from './account/account.component';
-import { InvestComponent } from './trade/invest/invest.component';
+import {InvestComponent} from './trade/invest/invest.component';
+import {HttpRequestInterceptor} from "./core/http.interceptor";
+import {MessageboxComponent} from "./core/messagebox/messagebox.component";
+import {AdminComponent} from './account/admin/admin.component';
+import {UserService} from "./user/service/user.service";
 
 @NgModule({
+  entryComponents: [
+    MessageboxComponent
+  ],
   declarations: [
     AppComponent,
     LoginComponent,
@@ -31,7 +38,9 @@ import { InvestComponent } from './trade/invest/invest.component';
     StockComponent,
     TradeComponent,
     AccountComponent,
-    InvestComponent
+    InvestComponent,
+    MessageboxComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +50,11 @@ import { InvestComponent } from './trade/invest/invest.component';
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [AuthGuard, AuthService, StockService],
+  providers: [AuthGuard, AuthService, StockService, UserService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: HttpRequestInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

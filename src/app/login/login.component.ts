@@ -29,13 +29,12 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     if (this.form.valid) {
       this.authService.login(this.form.value);
-      if (this.authService.isLoggedIn.subscribe(value => {
-        if (value == true) {
+      if (this.authService.getLoggedInUser.subscribe(value => {
+        if (value) {
           this.router.navigate(['/']);
         }
       }))
         this.formSubmitAttempt = true;
-      console.log(this.formSubmitAttempt);
       this.form.controls['username'].setErrors({'incorrect': true});
       this.form.controls['password'].setErrors({'incorrect': true});
     }

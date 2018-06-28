@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from "@angular/router";
+import {AuthService} from "../core/auth/auth.service";
+import {MatDialog} from "@angular/material";
+import {MessageboxComponent} from "../core/messagebox/messagebox.component";
 
 @Component({
   selector: 'app-register',
@@ -11,24 +14,32 @@ export class RegisterComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
+  constructor(private formBuilder: FormBuilder,
+              private router: Router,
+              private authService: AuthService,
+              private dialog: MatDialog) {
   }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      firstname: [null, Validators.required, Validators.minLength(4)],
-      lastname: [null, Validators.required, Validators.minLength(4)],
-
-      username: [null, Validators.required, Validators.minLength(4)],
-      email: [null, [Validators.required, Validators.email]],
-      password: [null, Validators.required, Validators.minLength(6)],
+      firstname: ['', Validators.minLength(4)],
+      lastname: ['', Validators.minLength(4)],
+      username: ['', Validators.minLength(4)],
+      email: ['', Validators.email],
+      password: ['', Validators.minLength(6)]
     });
   }
 
   onSubmit() {
     if (this.form.valid) {
-      /*this.authService.login(this.form.value);
-      this.formSubmitAttempt = true;*/
+      this.authService.register(this.form.value).subscribe(value => {
+        if (value) {
+          this.dialog.open(MessageboxComponent, {data: {message: "Registrierung war erfolgreich"}})
+        }
+      }, error => {
+        console.log(error);
+        this.dialog.open(MessageboxComponent, {data: {message: "Registrierung nicht erfolgreich. Benutzername oder E-Mail ist bereits vorhanden."}})
+      });
     }
   }
 
