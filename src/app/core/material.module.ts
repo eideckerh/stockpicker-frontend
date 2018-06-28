@@ -3,9 +3,11 @@ import {CommonModule} from '@angular/common';
 import {
   MatButtonModule,
   MatCardModule,
+  MatDialogModule,
   MatInputModule,
   MatProgressSpinnerModule,
   MatSelectModule,
+  MatTableModule,
   MatTabsModule,
   MatToolbarModule
 } from "@angular/material";
@@ -22,7 +24,9 @@ import {
     MatButtonModule,
     MatProgressSpinnerModule,
     MatSelectModule,
-    MatTabsModule],
+    MatTabsModule,
+    MatDialogModule,
+    MatTableModule],
 })
 export class CustomMaterialModule {
 }

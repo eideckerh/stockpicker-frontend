@@ -1,29 +1,53 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {BehaviorSubject} from 'rxjs';
 import {User} from "../../user/model/user";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Observable} from "rxjs/internal/Observable";
+import {map} from "rxjs/operators";
 
 @Injectable()
 export class AuthService {
-  private loggedIn = new BehaviorSubject<boolean>(false);
+  private loggedInUser = new BehaviorSubject<User>(undefined);
 
-  get isLoggedIn() {
-    return this.loggedIn.asObservable();
+  get getLoggedInUser() {
+    return this.loggedInUser.asObservable();
   }
 
   constructor(
+    private http: HttpClient,
     private router: Router
-  ) {}
+  ) {
+  }
 
-  login(user: User){
-    if (user.username !== '' && user.password != '' ) {
-      this.loggedIn.next(true);
-      this.router.navigate(['/']);
+  register(user: User): Observable<User> {
+    return this.http.post('/register', user).pipe(map((res: User) => {
+      return res;
+    }))
+    //.map((res: Response) => res.status == 204
+  }
+
+  login(user: User) {
+    if (user.username !== '' && user.password != '') {
+      let headers = new HttpHeaders({
+        'Authorization': 'Basic ' + btoa(user.username + ":" + user.password),
+        'Content-Type': 'application/x-www-form-urlencoded'
+      });
+      this.http.get('/login', {headers: headers}).subscribe(
+        (result: User) => {
+          if (result) {
+            console.log("User " + result.username + " with role " + result.role + " logged in.")
+
+            result.password = user.password;
+            this.loggedInUser.next(result);
+          }
+        }
+      )
     }
   }
 
   logout() {
-    this.loggedIn.next(false);
+    this.loggedInUser.next(undefined);
     this.router.navigate(['/login']);
   }
 }

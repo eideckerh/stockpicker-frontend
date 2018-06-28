@@ -8,22 +8,22 @@ export class UserService {
   }
 
   getAll() {
-    return this.http.get<User[]>('/api/users');
+    return this.http.get<User[]>('/admin/users');
   }
 
   getById(id: number) {
-    return this.http.get('/api/users/' + id);
+    return this.http.get('/admin/users' + id);
   }
 
   create(user: User) {
-    return this.http.post('/api/users', user);
+    return this.http.post('/admin/users', user);
   }
 
   update(user: User) {
-    return this.http.put('/api/users/' + user.id, user);
+    return this.http.put('/admin/users/' + user.id, user);
   }
 
   delete(id: number) {
-    return this.http.delete('/api/users/' + id);
+    return this.http.delete('/admin/users/' + id);
   }
 }

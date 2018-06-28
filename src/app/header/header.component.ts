@@ -1,6 +1,5 @@
-import {Component, OnInit, ɵQueryBindingType} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../core/auth/auth.service";
-import {Observable} from "rxjs/internal/Observable";
 
 @Component({
   selector: 'app-header',
@@ -9,16 +8,23 @@ import {Observable} from "rxjs/internal/Observable";
 })
 export class HeaderComponent implements OnInit {
 
-  public isLoggedIn: Observable<boolean>;
+  public isLoggedIn: boolean;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {
+  }
 
   ngOnInit() {
-    this.isLoggedIn = this.authService.isLoggedIn;
+    this.authService.getLoggedInUser.subscribe(user => {
+      if (user) {
+        this.isLoggedIn = true;
+      } else {
+        this.isLoggedIn = false;
+      }
+    });
   }
 
   onLogout() {
-      this.authService.logout();
+    this.authService.logout();
   }
 
 }
