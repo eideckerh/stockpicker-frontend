@@ -24,14 +24,23 @@
   </ng-container>
 
   <ng-container matColumnDef="role">
-    <th mat-header-cell *matHeaderCellDef> Rolle</th>
-    <td mat-cell *matCellDef="let element"> {{element.role}}</td>
+    <th mat-header-cell *matHeaderCellDef> Admin</th>
+    <td mat-cell *matCellDef="let element">
+      <mat-checkbox [checked]="isAdmin(element)" (click)="onToggleRole(element)"></mat-checkbox>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="active">
+    <th mat-header-cell *matHeaderCellDef> Aktiv</th>
+    <td mat-cell *matCellDef="let element">
+      <mat-checkbox [ngModel]="element.active" (click)="onToggleActive(element)"></mat-checkbox>
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef> Aktion</th>
     <td mat-cell *matCellDef="let row">
-      <button mat-raised-button>Aktivieren</button>
+      <button (click)="onDeleteUser(row)" mat-raised-button color="warn">Löschen</button>
     </td>
   </ng-container>
 
