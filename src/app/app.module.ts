@@ -8,7 +8,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {CustomMaterialModule} from "./core/material.module";
 import {AppRoutingModule} from "./core/app.routing.module";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HomeComponent} from './home/home.component';
 import {HeaderComponent} from './header/header.component';
 import {AuthGuard} from "./core/auth/auth.guard";
@@ -48,7 +48,8 @@ import {UserService} from "./user/service/user.service";
     BrowserAnimationsModule,
     CustomMaterialModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [AuthGuard, AuthService, StockService, UserService, {
     provide: HTTP_INTERCEPTORS,

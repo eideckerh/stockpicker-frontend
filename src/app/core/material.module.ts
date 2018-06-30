@@ -7,11 +7,11 @@ import {
   MatInputModule,
   MatProgressSpinnerModule,
   MatSelectModule,
-  MatTableModule,
   MatTabsModule,
   MatToolbarModule
 } from "@angular/material";
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   imports: [
@@ -26,7 +26,8 @@ import {
     MatSelectModule,
     MatTabsModule,
     MatDialogModule,
-    MatTableModule],
+    MatTableModule,
+    MatCheckboxModule],
 })
 export class CustomMaterialModule {
 }

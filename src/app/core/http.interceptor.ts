@@ -19,8 +19,8 @@ export class HttpRequestInterceptor implements HttpInterceptor {
       if (user) {
         req = req.clone({
           setHeaders: {
-            'Authorization': 'Basic ' + btoa(user.username + ":" + user.password),
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Authorization': 'Basic ' + btoa(user.username + ":" + user.password)
+            //      'Content-Type': 'application/x-www-form-urlencoded'
           }
         });
       }
