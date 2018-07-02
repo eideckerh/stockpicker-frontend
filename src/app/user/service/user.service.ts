@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {User} from "../model/user";
+import {Observable} from "rxjs/internal/Observable";
 
 @Injectable()
 export class UserService {
   constructor(private http: HttpClient) {
   }
 
-  getAll() {
+  getAll(): Observable<User[]> {
     return this.http.get<User[]>('/admin/users');
   }
 

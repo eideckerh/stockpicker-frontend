@@ -1,10 +1,25 @@
 <mat-tab-group>
+
   <mat-tab label="Aktiensuche">
-    <h1>Some tab content</h1>
+    <mat-card>
+      <mat-card-content>
+        <mat-form-field>
+          <p>Suche: </p>
+          <input type="text" matInput [formControl]="searchValue" [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{ option }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+
   </mat-tab>
   <mat-tab label="Beliebte Aktien">
     <div *ngFor="let symbol of favoriteStockSymbols">
-      <app-stock symbol={{symbol}} [routerLink]="['/invest', { symbol: symbol }]"></app-stock>
+      <p>{{symbol}}</p>
+      <!-- <app-stock symbol={{symbol}} [routerLink]="['/invest', { symbol: symbol }]"></app-stock>  -->
     </div>
   </mat-tab>
 </mat-tab-group>

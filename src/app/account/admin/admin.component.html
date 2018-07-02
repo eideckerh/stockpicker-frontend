@@ -17,7 +17,7 @@
     <td mat-cell *matCellDef="let element"> {{element.firstname}}</td>
   </ng-container>
 
-  <!-- Symbol Column -->
+  <!-- SymbolType Column -->
   <ng-container matColumnDef="lastname">
     <th mat-header-cell *matHeaderCellDef> Nachname</th>
     <td mat-cell *matCellDef="let element"> {{element.lastname}}</td>
@@ -37,8 +37,8 @@
     <th mat-header-cell *matHeaderCellDef> Aktiv</th>
     <td mat-cell *matCellDef="let element">
       <mat-select (selectionChange)="onToggleActive($event, element)" [(ngModel)]="element.active">
-        <mat-option value=true>Aktiv</mat-option>
-        <mat-option value=false>Inaktiv</mat-option>
+        <mat-option [value]=true>Aktiv</mat-option>
+        <mat-option [value]=false>Inaktiv</mat-option>
       </mat-select>
     </td>
   </ng-container>

@@ -5,6 +5,7 @@ import {User} from "../../user/model/user";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs/internal/Observable";
 import {map} from "rxjs/operators";
+import {StockService} from "../../stock/stock.service";
 
 @Injectable()
 export class AuthService {
@@ -36,7 +37,7 @@ export class AuthService {
       this.http.get('/login', {headers: headers}).subscribe(
         (result: User) => {
           if (result) {
-            console.log("User " + result.username + " with role " + result.role + " logged in.")
+            console.log("Symbol " + result.username + " with role " + result.role + " logged in.")
 
             result.password = user.password;
             this.loggedInUser.next(result);
