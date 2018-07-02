@@ -5,3 +5,7 @@ table {
 button {
   margin-right: 10px;
 }
+
+mat-select {
+  width: 105px;
+}

@@ -1,0 +1,6 @@
+{
+  "/admin/users": "/users",
+  "/admin/users/:id": "/users/:id",
+  "/login": "/users/1",
+  "/register": "/users"
+}

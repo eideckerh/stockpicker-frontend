@@ -2,11 +2,32 @@
   "users": [
     {
       "id": 1,
-      "username": "admin",
-      "password": "admin",
+      "username": "adminuser",
+      "password": "adminuser",
+      "active": true,
+      "role": "ADMIN",
+      "firstname": "Web",
+      "lastname": "Entwicklung",
+      "email": "test@gmail.com"
+    },
+    {
+      "id": 2,
+      "username": "user22",
+      "password": "user22",
+      "active": true,
+      "role": "ADMIN",
       "firstName": "Web",
       "lastName": "Entwicklung",
-      "email": "test@gmail.com"
+      "email": "test22@gmail.com"
+    },
+    {
+      "firstname": "Test",
+      "lastname": "Test",
+      "username": "testas",
+      "email": "testas@testas",
+      "password": "testas",
+      "id": 3,
+      "active": true
     }
   ],
   "profile": {

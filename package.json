@@ -7,7 +7,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "json-server": "json-server --watch db.json --port 3004",
+    "json-server": "json-server --watch db.json --routes routes.json --port 8080",
     "e2e": "ng e2e"
   },
   "private": true,
