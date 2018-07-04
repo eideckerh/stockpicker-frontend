@@ -1,6 +1,8 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {TradeRequest} from "./model/traderequest";
+import {Trade} from "./model/trade";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: "root"
@@ -13,18 +15,23 @@ export class TradeService {
   }
 
   createTrade(request: TradeRequest) {
-    return this.http.post(this.url, request );
+    return this.http.post(this.url, request);
   }
 
   closeTrade(userId: number) {
-    return this.http.post(this.url + "/${userId}/close");
+    return this.http.post(this.url + "/${userId}/close", null);
   }
 
-  getTimeSeries(symbol: string, functionName: string, interval: string) {
-    return this.http.get(this.url + "/timeserie", {
-      params: new HttpParams().set("symbol", symbol)
-        .append("function", functionName)
-        .append("interval", interval)
-    })
-      .pipe(map(result => result));
+  getTrades(): Observable<Trade[]> {
+    return this.http.get<Trade[]>(this.url);
   }
+
+  getTrade(tradeId: number) {
+    return this.http.get<Trade>(this.url + "/${tradeId}");
+  }
+
+  getOpenTrades(): Observable<Trade[]> {
+    return this.http.get<Trade[]>(this.url + "open");
+  }
+
+}
