@@ -8,22 +8,27 @@ import {map} from "rxjs/operators";
 
 @Injectable()
 export class StockService {
-  private url: string = "/stock/symbol";
+  private url: string = "/stock";
 
   constructor(private http: HttpClient) {
   }
 
-  getTrending(): Observable<SymbolStatistic[]> {
-    return this.http.get<SymbolStatistic[]>(this.url + "/trending");
+  getTrendingSymbols(): Observable<SymbolStatistic[]> {
+    return this.http.get<SymbolStatistic[]>(this.url + "/symbol/trending");
   }
 
   getSymbolsByName(name: string): Observable<Symbol[]> {
-
-    return this.http.get<Symbol[]>(this.url, {params: new HttpParams().set("name", name)});
+    return this.http.get<Symbol[]>(this.url + "/symbol", {
+      params: new HttpParams().set("name", name)
+    });
   }
 
-  stockData(symbol: string) {
-    return this.http.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=' + symbol + '&apikey=H52S5Y8B97AZMBHK')
+  getTimeSeries(symbol: string, functionName: string, interval: string) {
+    return this.http.get(this.url + "/timeserie", {
+      params: new HttpParams().set("symbol", symbol)
+        .append("function", functionName)
+        .append("interval", interval)
+    })
       .pipe(map(result => result));
   }
 }

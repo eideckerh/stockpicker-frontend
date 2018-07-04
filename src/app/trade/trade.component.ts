@@ -21,6 +21,9 @@ export class TradeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.stockService.getTimeSeries("NVDA", "TIME_SERIES_DAILY", "60min")
+      .subscribe(value => console.log(value));
+
     this.fillOptions("");
     this.filteredOptions = this.searchValue.valueChanges.pipe(
       startWith(''),
