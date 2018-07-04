@@ -7,13 +7,16 @@
           <p>Suche: </p>
           <input type="text" matInput [formControl]="searchValue" [matAutocomplete]="auto">
           <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-              {{ option }}
+            <mat-option (onSelectionChange)="onSelectionChange($event, option)"
+                        *ngFor="let option of filteredOptions | async" [value]="option.name">
+              {{ option.name }}
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
       </mat-card-content>
     </mat-card>
+    <app-stock *ngIf="selectedValue" symbol={{selectedValue}}
+               [routerLink]="['/invest', { symbol: selectedValue }]"></app-stock>
 
   </mat-tab>
   <mat-tab label="Beliebte Aktien">

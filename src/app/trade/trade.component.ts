@@ -3,6 +3,8 @@ import {StockService} from "../stock/stock.service";
 import {FormControl} from "@angular/forms";
 import {Observable} from "rxjs/internal/Observable";
 import {map, startWith} from "rxjs/operators";
+import {Symbol} from "../stock/model/symbol";
+import {MatOptionSelectionChange} from "@angular/material";
 
 @Component({
   selector: 'app-trade',
@@ -11,9 +13,10 @@ import {map, startWith} from "rxjs/operators";
 })
 export class TradeComponent implements OnInit {
 
+  selectedValue: string;
   searchValue: FormControl = new FormControl();
-  searchOptions: string[] = [];
-  filteredOptions: Observable<string[]>;
+  searchOptions: Symbol[] = [];
+  filteredOptions: Observable<Symbol[]>;
   favoriteStockSymbols: string[];
 
   constructor(private stockService: StockService) {
@@ -21,8 +24,8 @@ export class TradeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.stockService.getTimeSeries("NVDA", "TIME_SERIES_DAILY", "60min")
-      .subscribe(value => console.log(value));
+//  this.stockService.getTimeSeries("MSFT", "TIME_SERIES_INTRADAY", "15min")
+//    .subscribe(value => console.log(value));
 
     this.fillOptions("");
     this.filteredOptions = this.searchValue.valueChanges.pipe(
@@ -31,16 +34,24 @@ export class TradeComponent implements OnInit {
     );
   }
 
-  private filter(value: string): string[] {
+  private filter(value: string): Symbol[] {
     const filterValue = value.toLowerCase();
-    return this.searchOptions.filter(option => option.toLowerCase().includes(filterValue));
+    return this.searchOptions.filter((option: Symbol) => {
+      return option.name.toLowerCase().includes(filterValue) || option.key.toLowerCase().includes(filterValue);
+    });
   }
 
   fillOptions(name: string) {
     this.stockService.getSymbolsByName("").subscribe(values => {
-      console.log(values);
-      values.forEach(value => this.searchOptions.push(value.name))
+      values.forEach(value => this.searchOptions.push(value))
+      console.log(this.searchOptions)
     });
+  }
+
+  onSelectionChange($event: MatOptionSelectionChange, symbol: Symbol) {
+    if ($event.source.selected) {
+      this.selectedValue = symbol.key;
+    }
   }
 
 }
