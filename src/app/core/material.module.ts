@@ -4,6 +4,7 @@ import {
   MatButtonModule,
   MatCardModule,
   MatDialogModule,
+  MatExpansionModule,
   MatInputModule,
   MatProgressSpinnerModule,
   MatSelectModule,
@@ -29,7 +30,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatDialogModule,
     MatTableModule,
     MatCheckboxModule,
-    MatAutocompleteModule],
+    MatAutocompleteModule,
+    MatExpansionModule],
 })
 export class CustomMaterialModule {
 }

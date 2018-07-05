@@ -1,10 +1,9 @@
-<mat-tab-group>
-
+<mat-tab-group dynamicHeight="true">
   <mat-tab label="Aktiensuche">
     <mat-card>
       <mat-card-content>
+        <p>Suche:</p>
         <mat-form-field>
-          <p>Suche: </p>
           <input type="text" matInput [formControl]="searchValue" [matAutocomplete]="auto">
           <mat-autocomplete #auto="matAutocomplete">
             <mat-option (onSelectionChange)="onSelectionChange($event, option)"

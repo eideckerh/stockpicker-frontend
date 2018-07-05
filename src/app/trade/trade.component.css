@@ -4,3 +4,11 @@ app-stock {
   width: 650px;
 }
 
+mat-card {
+  width: 603px;
+  margin: 5px;
+}
+
+mat-form-field {
+  width: 400px;
+}

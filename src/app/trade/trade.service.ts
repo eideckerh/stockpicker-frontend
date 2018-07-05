@@ -31,7 +31,7 @@ export class TradeService {
   }
 
   getOpenTrades(): Observable<Trade[]> {
-    return this.http.get<Trade[]>(this.url + "open");
+    return this.http.get<Trade[]>(this.url + "/open");
   }
 
 }

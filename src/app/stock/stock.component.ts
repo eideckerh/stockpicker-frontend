@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {StockService} from "./stock.service";
 import {Chart} from 'chart.js'
 
@@ -13,6 +13,9 @@ export class StockComponent implements OnInit {
 
   @Input()
   public symbol: string;
+
+  @Output()
+  public price = new EventEmitter<number>();
 
   public chart: Chart = [];
   public chartIsLoaded: boolean = false;
@@ -38,6 +41,7 @@ export class StockComponent implements OnInit {
         this.stockClosingValues.unshift(timeSeries[dateString]['close']);
         this.stockVolumeValue.unshift(timeSeries[dateString]['volume']);
       })
+      this.price.emit(this.stockClosingValues[this.stockClosingValues.length - 1]);
 
       this.chart = new Chart(this.canvas.nativeElement.getContext('2d'), {
         type: 'line',

@@ -1,4 +1,5 @@
-mat-card {
+.content {
+  max-width: 1400px;
 }
 button[type="submit"] {
   float: right;
