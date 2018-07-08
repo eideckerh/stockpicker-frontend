@@ -23,6 +23,7 @@ import {HttpRequestInterceptor} from "./core/http.interceptor";
 import {MessageboxComponent} from "./core/messagebox/messagebox.component";
 import {AdminComponent} from './account/admin/admin.component';
 import {UserService} from "./user/service/user.service";
+import { OverviewComponent } from './account/overview/overview.component';
 
 @NgModule({
   entryComponents: [
@@ -40,7 +41,8 @@ import {UserService} from "./user/service/user.service";
     AccountComponent,
     InvestComponent,
     MessageboxComponent,
-    AdminComponent
+    AdminComponent,
+    OverviewComponent
   ],
   imports: [
     BrowserModule,

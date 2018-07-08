@@ -5,7 +5,8 @@
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <button mat-raised-button color="warn" routerLink="/trade" type="button">Zurück</button>
         <mat-form-field>
-          <mat-select placeholder="Geschäftsart" formControlName="tradeType" required>
+          <mat-select (selectionChange)="onTradeTypeSelectionChange($event)" placeholder="Geschäftsart"
+                      formControlName="tradeType" required>
             <mat-option>--</mat-option>
             <mat-option *ngFor="let tradeType of tradeTypes" [value]="tradeType">
               {{tradeType}}

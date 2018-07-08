@@ -11,12 +11,17 @@ export class StockComponent implements OnInit {
 
   @ViewChild('canvas') canvas: ElementRef;
 
-  @Input()
-  public symbol: string;
+
+  @Input('symbol')
+  set input(value: string) {
+    this.symbol = value;
+    this.initChart();
+  }
 
   @Output()
   public price = new EventEmitter<number>();
 
+  public symbol: string;
   public chart: Chart = [];
   public chartIsLoaded: boolean = false;
   public stockDates: string[] = [];
@@ -30,6 +35,14 @@ export class StockComponent implements OnInit {
 
 
   ngOnInit() {
+  }
+
+  initChart() {
+    this.stockDates = [];
+    this.stockClosingValues = [];
+    this.stockHighValue = [];
+    this.stockVolumeValue = [];
+
     this.stockService.getTimeSeries(this.symbol, "TIME_SERIES_INTRADAY", "5min").subscribe(res => {
       let timeSeries = res['quotes'];
       this.parseDataFromTimeSeries(timeSeries);
@@ -37,7 +50,6 @@ export class StockComponent implements OnInit {
       this.chartIsLoaded = true;
     })
   }
-
 
   private parseDataFromTimeSeries(timeSeries: string) {
     Object.keys(timeSeries).sort((a, b) => {
@@ -89,6 +101,4 @@ export class StockComponent implements OnInit {
       minute: 'numeric'
     });
   }
-
-
 }
