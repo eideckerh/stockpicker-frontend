@@ -24,9 +24,6 @@ export class TradeComponent implements OnInit {
   }
 
   ngOnInit() {
-//  this.stockService.getTimeSeries("MSFT", "TIME_SERIES_INTRADAY", "15min")
-//    .subscribe(value => console.log(value));
-
     this.fillOptions("");
     this.filteredOptions = this.searchValue.valueChanges.pipe(
       startWith(''),
@@ -44,7 +41,6 @@ export class TradeComponent implements OnInit {
   fillOptions(name: string) {
     this.stockService.getSymbolsByName("").subscribe(values => {
       values.forEach(value => this.searchOptions.push(value))
-      console.log(this.searchOptions)
     });
   }
 

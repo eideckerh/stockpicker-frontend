@@ -50,6 +50,7 @@ export class InvestComponent implements OnInit {
         res => console.log(res),
         error => console.log(error));
     } else {
+      let request = new TradeRequest();
       // Verkaufen
     }
   }
