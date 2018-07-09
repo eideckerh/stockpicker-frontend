@@ -31,4 +31,16 @@ export class StockService {
     })
       .pipe(map(result => result));
   }
+
+  getBatch(symbol: string) {
+    return this.http.get(this.url + "/batch", {
+      params: new HttpParams().set("symbol", symbol)
+    })
+  }
+
+  getPrice(symbol: string) {
+    return this.getBatch(symbol).pipe(
+      map(value => value['quotes'][0]['price'])
+    );
+  }
 }

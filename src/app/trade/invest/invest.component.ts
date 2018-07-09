@@ -5,6 +5,7 @@ import {TradeService} from "../trade.service";
 import {TradeRequest} from "../model/traderequest";
 import {MatDialog} from "@angular/material";
 import {MessageboxComponent} from "../../core/messagebox/messagebox.component";
+import {StockService} from "../../stock/stock.service";
 
 @Component({
   selector: 'app-invest',
@@ -20,6 +21,7 @@ export class InvestComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
               private fb: FormBuilder,
               private tradeService: TradeService,
+              private stockService: StockService,
               private dialog: MatDialog) {
     this.tradeTypes = ['Kaufen', 'Verkaufen'];
   }
@@ -34,6 +36,7 @@ export class InvestComponent implements OnInit {
       price: [{value: 'wird ermittelt..', disabled: true}],
       holdAmount: [{value: 0, disabled: true}, Validators.required]
     });
+    this.updatePrice();
     this.updateHoldAmount();
   }
 
@@ -55,6 +58,12 @@ export class InvestComponent implements OnInit {
     } else {
       this.doSell();
     }
+  }
+
+  updatePrice() {
+    this.stockService.getPrice(this.symbol).subscribe(value => {
+      this.form.get('price').patchValue(value);
+    })
   }
 
   private doBuy() {
@@ -84,9 +93,6 @@ export class InvestComponent implements OnInit {
     this.form.get('amount').setValue(0);
   }
 
-  onPriceChange(price: number) {
-    this.form.get('price').patchValue(price);
-  }
 
   onTradeTypeSelectionChange(event) {
     console.log(event.value)

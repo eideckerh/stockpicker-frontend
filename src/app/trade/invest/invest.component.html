@@ -1,5 +1,5 @@
 <div class="content">
-  <app-stock (price)="onPriceChange($event)" symbol={{symbol}}></app-stock>
+  <app-stock symbol={{symbol}}></app-stock>
   <mat-card>
     <mat-card-content>
       <form [formGroup]="form" (ngSubmit)="onSubmit()">

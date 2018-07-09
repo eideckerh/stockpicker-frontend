@@ -10,4 +10,5 @@ export class Trade {
   closed: Date;
   openValue: number;
   closeValue: number;
+  price?: number;
 }
