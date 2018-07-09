@@ -30,6 +30,9 @@ export class LoginComponent implements OnInit {
       this.authService.getLoggedInUser.subscribe(value => {
         if (value) {
           this.router.navigate(["/"]);
+        } else {
+          this.form.controls["username"].setErrors({"incorrect": true});
+          this.form.controls["password"].setErrors({"incorrect": true});
         }
       }, error => {
         this.form.controls["username"].setErrors({"incorrect": true});
