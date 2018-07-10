@@ -55,7 +55,7 @@ export class InvestComponent implements OnInit {
   onSubmit() {
     if (this.form.get('tradeType').value === this.tradeTypes[0]) {
       this.doBuy();
-    } else {
+    } else if (this.form.get('tradeType').value === this.tradeTypes[1]) {
       this.doSell();
     }
   }
@@ -98,8 +98,9 @@ export class InvestComponent implements OnInit {
     console.log(event.value)
     if (event.value === this.tradeTypes[0]) {
       // Kaufen
+      this.form.get('amount').reset();
       this.form.get('amount').enable();
-    } else {
+    } else if (event.value === this.tradeTypes[1]) {
       // Verkaufen
       console.log("Trying to set value amount to holdAmount: " + this.form.get('holdAmount').value)
       this.form.get('amount').setValue(this.form.get('holdAmount').value);

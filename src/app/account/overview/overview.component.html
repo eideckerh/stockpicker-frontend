@@ -16,12 +16,18 @@
 
   <ng-container matColumnDef="openValue">
     <th mat-header-cell *matHeaderCellDef> Aktueller Wert <br/>Einstandswert</th>
-    <td class="numberformat" mat-cell *matCellDef="let element"><br/> {{(element.openValue * element.volume) | number:'1.2-2'}}</td>
+    <td class="numberformat" mat-cell *matCellDef="let element"> {{(element.price * element.volume) |
+      number:'1.2-2'}}<br/>
+      {{(element.openValue * element.volume) | number:'1.2-2'}}
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="price">
-    <th mat-header-cell *matHeaderCellDef> Preis</th>
-    <td mat-cell *matCellDef="let element"> {{element.price}}</td>
+    <th mat-header-cell *matHeaderCellDef> Entwicklung abs. <br/> Entwicklung %</th>
+    <td mat-cell *matCellDef="let element">
+      {{(element.price * element.volume - element.openValue * element.volume) | number:'1.2-2'}} <br/>
+      {{ ((((element.price * element.volume) / (element.openValue * element.volume)) - 1) * 100) | number: '1.2-2' }} %
+    </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

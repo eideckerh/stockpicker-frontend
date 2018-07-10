@@ -13,7 +13,6 @@ import {StockService} from "../../stock/stock.service";
 export class OverviewComponent implements OnInit {
   displayedColumns: string[] = ["symbol", "volume", "opened", "openValue", "price"];
   dataSource: MatTableDataSource<Trade>;
-  cachedTradesList: Trade[] = [];
 
   constructor(private tradeService: TradeService,
               private dialog: MatDialog,
@@ -31,17 +30,11 @@ export class OverviewComponent implements OnInit {
   }
 
   private addPriceToTrade(trade: Trade) {
-    // let cachedTrade = this.cachedTradesList.find(cached => cached.symbol.key == trade.symbol.key);
-    // if (cachedTrade) {
-    //   trade.price = cachedTrade.price;
-    // } else {
-    //   this.stockService.getPrice(trade.symbol.key).subscribe(
-    //     price => {
-    //       trade.price = price;
-    //     }
-    //   );
-    //   this.addPriceToTrade()
-    // }
+    this.stockService.getPrice(trade.symbol.key).subscribe(
+      (price: number) => {
+        trade.price = price;
+      }
+    );
   }
 
   convertToReadableDate(timestamp: number): string {
