@@ -20,8 +20,7 @@
   </mat-tab>
   <mat-tab label="Beliebte Aktien">
     <div *ngFor="let symbol of favoriteStockSymbols">
-      <p>{{symbol}}</p>
-      <!-- <app-stock symbol={{symbol}} [routerLink]="['/invest', { symbol: symbol }]"></app-stock>  -->
+      <app-stock class="float" symbol={{symbol}} [routerLink]="['/invest', { symbol: symbol }]"></app-stock>
     </div>
   </mat-tab>
 </mat-tab-group>

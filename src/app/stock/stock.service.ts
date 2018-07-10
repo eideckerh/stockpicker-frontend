@@ -16,8 +16,10 @@ export class StockService {
   constructor(private http: HttpClient) {
   }
 
-  getTrendingSymbols(): Observable<SymbolStatistic[]> {
-    return this.http.get<SymbolStatistic[]>(this.url + "/symbol/trending");
+  getTrendingSymbols(): Observable<string[]> {
+    return this.http.get<SymbolStatistic[]>(this.url + "/symbol/trending").pipe(
+      map(symbolStatistics => symbolStatistics.map(statistic => statistic.symbol.key))
+    );
   }
 
   getSymbolsByName(name: string): Observable<Symbol[]> {
@@ -25,7 +27,6 @@ export class StockService {
       params: new HttpParams().set("name", name)
     });
   }
-
 
   getTimeSeries(symbol: string, functionName: string, interval: string) {
     let key = symbol + functionName + interval;

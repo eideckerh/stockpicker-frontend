@@ -20,7 +20,7 @@ export class TradeComponent implements OnInit {
   favoriteStockSymbols: string[];
 
   constructor(private stockService: StockService) {
-    this.favoriteStockSymbols = ['NVDA', 'MSFT', 'TSLA', 'BRK.A', 'TMUS'];
+    this.favoriteStockSymbols = [];
   }
 
   ngOnInit() {
@@ -29,6 +29,10 @@ export class TradeComponent implements OnInit {
       startWith(''),
       map(value => this.filter(value))
     );
+    this.stockService.getTrendingSymbols().subscribe(symbolStats => {
+      console.log(symbolStats),
+      this.favoriteStockSymbols = symbolStats
+    })
   }
 
   private filter(value: string): Symbol[] {

@@ -5,3 +5,11 @@ table {
 .numberformat {
   child-align: right;
 }
+
+.positive {
+  background-color: lightgreen;
+}
+
+.negative {
+  background-color: lightcoral;
+}

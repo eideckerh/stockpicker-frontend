@@ -12,3 +12,7 @@ mat-card {
 mat-form-field {
   width: 400px;
 }
+
+.float {
+  float: left;
+}

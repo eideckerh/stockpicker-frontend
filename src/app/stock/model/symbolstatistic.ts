@@ -1,7 +1,7 @@
 import {Symbol} from "./symbol";
 
-export class SymbolStatistic
-{
+export class SymbolStatistic {
   symbol: Symbol;
   count: number;
+
 }
