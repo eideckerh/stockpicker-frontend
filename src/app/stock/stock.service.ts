@@ -63,7 +63,7 @@ export class StockService {
 
   private requestPrice(symbol: string) {
     return this.getBatch(symbol).pipe(
-      map(value => value['quotes'][0]['price'])
+      map(value => value)
     );
   }
 }
