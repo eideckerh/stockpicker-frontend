@@ -3,7 +3,8 @@
     <app-overview></app-overview>
   </mat-tab>
   <mat-tab label="Depotbestand">
-    <h1>Some tab content</h1>
+    <p>Test</p>
+    <app-portfolio></app-portfolio>
   </mat-tab>
   <mat-tab *ngIf="user.role.match('ADMIN')" label="Administrative Verwaltung">
     <app-admin></app-admin>

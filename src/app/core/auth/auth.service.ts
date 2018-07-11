@@ -5,7 +5,6 @@ import {User} from "../../user/model/user";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs/internal/Observable";
 import {map} from "rxjs/operators";
-import {StockService} from "../../stock/stock.service";
 
 @Injectable()
 export class AuthService {
@@ -26,6 +25,12 @@ export class AuthService {
       return res;
     }))
     //.map((res: Response) => res.status == 204
+  }
+
+  getBalance(): Observable<number> {
+    return this.http.get('/account/balance').pipe(
+      map((value: number) => value)
+    )
   }
 
   login(user: User) {

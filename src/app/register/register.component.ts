@@ -33,9 +33,7 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     if (this.form.valid) {
       this.authService.register(this.form.value).subscribe(value => {
-        if (value) {
-          this.dialog.open(MessageboxComponent, {data: {message: "Registrierung war erfolgreich"}})
-        }
+        this.dialog.open(MessageboxComponent, {data: {message: "Registrierung war erfolgreich"}})
       }, error => {
         console.log(error);
         this.dialog.open(MessageboxComponent, {data: {message: "Registrierung nicht erfolgreich. Benutzername oder E-Mail ist bereits vorhanden."}})

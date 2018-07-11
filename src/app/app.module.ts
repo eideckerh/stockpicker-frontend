@@ -24,6 +24,7 @@ import {MessageboxComponent} from "./core/messagebox/messagebox.component";
 import {AdminComponent} from './account/admin/admin.component';
 import {UserService} from "./user/service/user.service";
 import { OverviewComponent } from './account/overview/overview.component';
+import { PortfolioComponent } from './account/portfolio/portfolio.component';
 
 @NgModule({
   entryComponents: [
@@ -42,7 +43,8 @@ import { OverviewComponent } from './account/overview/overview.component';
     InvestComponent,
     MessageboxComponent,
     AdminComponent,
-    OverviewComponent
+    OverviewComponent,
+    PortfolioComponent
   ],
   imports: [
     BrowserModule,

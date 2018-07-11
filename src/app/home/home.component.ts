@@ -2,12 +2,13 @@ import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-home',
-  template: '<p>Yay! You are logged in!</p>',
+  templateUrl: "./home.component.html",
   styles: []
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
