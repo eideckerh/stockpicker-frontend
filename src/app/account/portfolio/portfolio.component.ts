@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {Chart} from 'chart.js'
 import {TradeService} from "../../trade/trade.service";
 
@@ -9,8 +9,12 @@ import {TradeService} from "../../trade/trade.service";
 })
 export class PortfolioComponent implements OnInit {
 
+  @Input('text')
+  text: string;
+
   @ViewChild('canvas') canvas: ElementRef;
   chart: Chart = [];
+  dataMap = new Map<string, number>();
   data = [10, 20, 30];
   colors = ['#3140A5', '#E8EAF6', '#C5CBE9', '#29379D', '#9FA8DA', '#7985CB', '#1B278D', '#5C6BC0', '#3F51B5', '#394AAE'
   ];
@@ -20,9 +24,16 @@ export class PortfolioComponent implements OnInit {
 
 
   ngOnInit() {
-    this.chart = this.generateChart();
     this.tradeService.getOpenTrades().subscribe(trades => {
-
+      trades.forEach(trade => {
+        let volume = this.dataMap.get(trade.symbol.key);
+        if (!volume) {
+          volume = 0;
+        }
+        volume += trade.volume;
+        this.dataMap.set(trade.symbol.key, volume);
+      })
+      this.chart = this.generateChart();
     })
   }
 
@@ -34,28 +45,24 @@ export class PortfolioComponent implements OnInit {
       returnColors.push(color);
       colorCopy.push(color);
     }
-    console.log(returnColors)
     return returnColors;
   }
 
   private generateChart(): Chart {
 
     var myPieChart = new Chart(this.canvas.nativeElement.getContext('2d'), {
-      type: 'pie',
+      type: 'doughnut',
       data: {
         datasets: [{
-          data: this.data,
+          data: Array.from(this.dataMap.values()),
           backgroundColor: this.generateColors(this.data.length)
 
 
         }],
 
         // These labels appear in the legend and in the tooltips when hovering different arcs
-        labels: [
-          'Red',
-          'Yellow',
-          'Blue'
-        ]
+        labels: Array.from(this.dataMap.keys())
+
       }
     });
   }

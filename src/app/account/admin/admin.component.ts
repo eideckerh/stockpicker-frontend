@@ -21,7 +21,6 @@ export class AdminComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getAll().subscribe(value => {
-        console.log(value)
         this.dataSource = new MatTableDataSource<User>(value);
       },
       error => {

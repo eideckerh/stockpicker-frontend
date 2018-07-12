@@ -11,10 +11,12 @@ export class StockComponent implements OnInit {
 
   @ViewChild('canvas') canvas: ElementRef;
 
-
   @Input('symbol')
   set input(value: string) {
     this.symbol = value;
+    if (this.chart) {
+      this.chart.destroy();
+    }
     this.initChart();
   }
 
@@ -22,7 +24,7 @@ export class StockComponent implements OnInit {
   public price = new EventEmitter<number>();
 
   public symbol: string;
-  public chart: Chart = [];
+  public chart: Chart;
   public chartIsLoaded: boolean = false;
   public stockDates: string[] = [];
   public stockClosingValues: number[] = [];
@@ -32,7 +34,6 @@ export class StockComponent implements OnInit {
 
   constructor(private stockService: StockService) {
   }
-
 
   ngOnInit() {
   }
@@ -45,6 +46,7 @@ export class StockComponent implements OnInit {
 
     this.stockService.getTimeSeries(this.symbol, "TIME_SERIES_INTRADAY", "5min").subscribe(res => {
       let timeSeries = res['quotes'];
+      console.log(timeSeries)
       this.parseDataFromTimeSeries(timeSeries);
       this.chart = this.generateChart();
       this.chartIsLoaded = true;

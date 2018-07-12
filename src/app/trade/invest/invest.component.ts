@@ -95,7 +95,6 @@ export class InvestComponent implements OnInit {
 
 
   onTradeTypeSelectionChange(event) {
-    console.log(event.value)
     if (event.value === this.tradeTypes[0]) {
       // Kaufen
       this.form.get('amount').reset();

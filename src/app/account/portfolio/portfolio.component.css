@@ -1,3 +1,4 @@
-mat-card-content {
-  max-width: 1400px;
+mat-card {
+  max-width: 1000px;
+  margin: 5px;
 }

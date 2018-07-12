@@ -1,7 +1,8 @@
 <div>
   <mat-card>
     <mat-card-content>
-      <p>Depotbestand </p>
+      <p>{{text}} </p>
+      <p *ngIf="dataMap.size < 1"><br/><br/>Noch keine Positionen vorhanden.</p>
       <canvas #canvas>{{ chart }}</canvas>
     </mat-card-content>
   </mat-card>
