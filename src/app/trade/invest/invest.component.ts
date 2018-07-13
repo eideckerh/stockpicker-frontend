@@ -83,12 +83,13 @@ export class InvestComponent implements OnInit {
     this.tradeService.getOpenTrades().subscribe(trades => {
       trades.forEach(trade => {
         if (trade.symbol.key === this.symbol) {
-          this.tradeService.closeTrade(trade.id);
+          this.tradeService.closeTrade(trade.id).subscribe(value => {
+            this.dialog.open(MessageboxComponent,
+              {data: {message: "Alle Anteile wurden erfolgreich verkauft."}})
+          }, error1 => this.dialog.open(MessageboxComponent, {data: {message: "Anteile konnten nicht verkauft werden."}}));
         }
       })
     })
-    this.dialog.open(MessageboxComponent,
-      {data: {message: "Alle Anteile wurden erfolgreich verkauft."}})
     this.updateHoldAmount();
     this.form.get('amount').setValue(0);
   }

@@ -46,7 +46,6 @@ export class StockComponent implements OnInit {
 
     this.stockService.getTimeSeries(this.symbol, "TIME_SERIES_INTRADAY", "5min").subscribe(res => {
       let timeSeries = res['quotes'];
-      console.log(timeSeries)
       this.parseDataFromTimeSeries(timeSeries);
       this.chart = this.generateChart();
       this.chartIsLoaded = true;

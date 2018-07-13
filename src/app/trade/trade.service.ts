@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {TradeRequest} from "./model/traderequest";
 import {Trade} from "./model/trade";
 import {Observable} from "rxjs";
@@ -18,8 +18,8 @@ export class TradeService {
     return this.http.post(this.url, request);
   }
 
-  closeTrade(userId: number) {
-    return this.http.post(this.url + "/${userId}/close", null);
+  closeTrade(tradeId: number) {
+    return this.http.post(this.url + `/${tradeId}/close`, null);
   }
 
   getTrades(): Observable<Trade[]> {
@@ -27,11 +27,18 @@ export class TradeService {
   }
 
   getTrade(tradeId: number) {
-    return this.http.get<Trade>(this.url + "/${tradeId}");
+    return this.http.get<Trade>(this.url + `/${tradeId}`);
   }
 
   getOpenTrades(): Observable<Trade[]> {
     return this.http.get<Trade[]>(this.url + "/open");
   }
 
+  getTradeReport() {
+    let headers = new HttpHeaders();
+    headers = headers.set('Accept', 'application/pdf');
+    return this.http.get(this.url + "/report", {
+      headers: headers, responseType: 'blob'
+    });
+  }
 }

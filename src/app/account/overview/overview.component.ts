@@ -18,6 +18,10 @@ export class OverviewComponent implements OnInit {
   constructor(private tradeService: TradeService,
               private dialog: MatDialog,
               private stockService: StockService) {
+
+  }
+
+  ngOnInit() {
     this.tradeService.getTrades().subscribe(values => {
         values.forEach(value => this.addPriceToTrade(value));
         this.dataSource = new MatTableDataSource<Trade>(values);
@@ -25,9 +29,6 @@ export class OverviewComponent implements OnInit {
       error => {
         this.dialog.open(MessageboxComponent, {data: {message: "Übersichtsdaten konnten nicht geladen werden: " + error.status}});
       });
-  }
-
-  ngOnInit() {
   }
 
   private addPriceToTrade(trade: Trade) {
@@ -38,6 +39,23 @@ export class OverviewComponent implements OnInit {
     );
   }
 
+  onDownloadStatistic() {
+    let link = document.createElement('a');
+    let blob;
+    this.tradeService.getTradeReport().subscribe(res => {
+        blob = res;
+        console.log(blob);
+        link.href = window.URL.createObjectURL(blob);
+        link.download = "Handelsbericht.pdf";
+        link.click();
+
+        setTimeout(function () {
+          window.URL.revokeObjectURL(link.href);
+        }, 0)
+      }
+    );
+
+  }
 
   getTotalCurrentValue() {
     let totalCurrentValue = 0;

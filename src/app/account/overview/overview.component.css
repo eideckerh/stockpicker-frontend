@@ -6,8 +6,6 @@ table {
   text-align: right;
 }
 
-
-
 .positive {
   background-color: lightgreen;
 }
@@ -18,6 +16,12 @@ table {
 
 tr.mat-footer-row {
   font-weight: bold;
+}
+
+.download {
+  alignment: right;
+  margin: 5px;
+  margin-top: 10px;
 }
 
 
