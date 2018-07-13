@@ -2,9 +2,11 @@ table {
   width: 100%;
 }
 
-.numberformat {
-  child-align: right;
+.rightAlign {
+  text-align: right;
 }
+
+
 
 .positive {
   background-color: lightgreen;
@@ -13,3 +15,9 @@ table {
 .negative {
   background-color: lightcoral;
 }
+
+tr.mat-footer-row {
+  font-weight: bold;
+}
+
+

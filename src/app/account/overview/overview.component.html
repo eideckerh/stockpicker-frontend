@@ -2,34 +2,44 @@
   <ng-container matColumnDef="symbol">
     <th mat-header-cell *matHeaderCellDef> Aktie</th>
     <td mat-cell *matCellDef="let element"> {{element.symbol.name}}</td>
+    <td mat-footer-cell *matFooterCellDef> Gesamtentwicklung</td>
   </ng-container>
 
   <ng-container matColumnDef="volume">
     <th mat-header-cell *matHeaderCellDef> Aktienanzahl</th>
     <td mat-cell *matCellDef="let element"> {{element.volume}}</td>
+    <td mat-footer-cell *matFooterCellDef></td>
   </ng-container>
 
   <ng-container matColumnDef="opened">
     <th mat-header-cell *matHeaderCellDef> Zeitpunkt des Erwerbs</th>
     <td mat-cell *matCellDef="let element"> {{convertToReadableDate(element.opened)}}</td>
+    <td mat-footer-cell *matFooterCellDef></td>
   </ng-container>
 
   <ng-container matColumnDef="openValue">
-    <th mat-header-cell *matHeaderCellDef> Aktueller Wert <br/>Einstandswert</th>
-    <td class="numberformat" mat-cell *matCellDef="let element"> {{(element.price * element.volume) |
-      number:'1.2-2'}}<br/>
-      {{(element.openValue * element.volume) | number:'1.2-2'}}
+    <th mat-header-cell class="rightAlign" *matHeaderCellDef> Aktueller Wert <br/>Einstandswert</th>
+    <td class="numberformat" class="rightAlign" mat-cell *matCellDef="let element"> {{(element.price * element.volume) |
+      number:'1.2-2'}} $<br/>
+      {{(element.openValue * element.volume) | number:'1.2-2'}} $
+    </td>
+    <td mat-footer-cell class="rightAlign" *matFooterCellDef> {{ getTotalCurrentValue() | number:'1.2-2' }} $<br/>
+      {{ getTotalOpenValue() | number:'1.2-2' }} $
     </td>
   </ng-container>
 
   <ng-container matColumnDef="price">
-    <th mat-header-cell *matHeaderCellDef> Entwicklung abs. <br/> Entwicklung %</th>
-    <td mat-cell *matCellDef="let element">
-      {{(element.price * element.volume - element.openValue * element.volume) | number:'1.2-2'}} <br/>
+    <th mat-header-cell class="rightAlign" *matHeaderCellDef> Entwicklung abs. <br/> Entwicklung %</th>
+    <td mat-cell class="rightAlign" *matCellDef="let element">
+      {{(element.price * element.volume - element.openValue * element.volume) | number:'1.2-2'}} $<br/>
       {{ ((((element.price * element.volume) / (element.openValue * element.volume)) - 1) * 100) | number: '1.2-2' }} %
+    </td>
+    <td mat-footer-cell class="rightAlign" *matFooterCellDef> {{ getTotalProfit() | number:'1.2-2' }} $<br/>
+      {{getTotalProfitPercentage()| number: '1.2-2' }} %
     </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
 </table>

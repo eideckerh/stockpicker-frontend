@@ -12,6 +12,7 @@ import {StockService} from "../../stock/stock.service";
 })
 export class OverviewComponent implements OnInit {
   displayedColumns: string[] = ["symbol", "volume", "opened", "openValue", "price"];
+  displayedFooterColumns: string[] = ["symbol", "openValue", "price"];
   dataSource: MatTableDataSource<Trade>;
 
   constructor(private tradeService: TradeService,
@@ -37,6 +38,31 @@ export class OverviewComponent implements OnInit {
     );
   }
 
+
+  getTotalCurrentValue() {
+    let totalCurrentValue = 0;
+    this.dataSource.data.forEach(trade => {
+      totalCurrentValue += trade.price * trade.volume;
+    })
+    return totalCurrentValue;
+  }
+
+  getTotalOpenValue() {
+    let totalOpenValue = 0;
+    this.dataSource.data.forEach(trade => {
+      totalOpenValue += trade.openValue * trade.volume;
+    })
+    return totalOpenValue;
+  }
+
+  getTotalProfit() {
+    return this.getTotalCurrentValue() - this.getTotalOpenValue();
+  }
+
+  getTotalProfitPercentage() {
+    return (this.getTotalCurrentValue() / this.getTotalOpenValue() - 1) * 100
+  }
+
   convertToReadableDate(timestamp: number): string {
     const date: Date = new Date(timestamp);
     return this.convertDateToString(date);
@@ -51,5 +77,6 @@ export class OverviewComponent implements OnInit {
       minute: 'numeric'
     });
   }
+
 
 }
