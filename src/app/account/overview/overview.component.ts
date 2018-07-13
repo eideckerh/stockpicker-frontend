@@ -22,7 +22,7 @@ export class OverviewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.tradeService.getTrades().subscribe(values => {
+    this.tradeService.getOpenTrades().subscribe(values => {
         values.forEach(value => this.addPriceToTrade(value));
         this.dataSource = new MatTableDataSource<Trade>(values);
       },
