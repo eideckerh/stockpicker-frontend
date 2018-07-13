@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
@@ -23,8 +23,10 @@ import {HttpRequestInterceptor} from "./core/http.interceptor";
 import {MessageboxComponent} from "./core/messagebox/messagebox.component";
 import {AdminComponent} from './account/admin/admin.component';
 import {UserService} from "./user/service/user.service";
-import { OverviewComponent } from './account/overview/overview.component';
-import { PortfolioComponent } from './account/portfolio/portfolio.component';
+import {OverviewComponent} from './account/overview/overview.component';
+import {PortfolioComponent} from './account/portfolio/portfolio.component';
+import {registerLocaleData} from "@angular/common";
+import localeDE from '@angular/common/locales/de'
 
 @NgModule({
   entryComponents: [
@@ -55,7 +57,7 @@ import { PortfolioComponent } from './account/portfolio/portfolio.component';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [AuthGuard, AuthService, StockService, UserService, {
+  providers: [AuthGuard, AuthService, StockService, UserService, {provide: LOCALE_ID, useValue: 'de'}, {
     provide: HTTP_INTERCEPTORS,
     useClass: HttpRequestInterceptor,
     multi: true
@@ -64,3 +66,5 @@ import { PortfolioComponent } from './account/portfolio/portfolio.component';
 })
 export class AppModule {
 }
+
+registerLocaleData(localeDE);
