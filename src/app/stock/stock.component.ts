@@ -2,6 +2,9 @@ import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} f
 import {StockService} from "./stock.service";
 import {Chart} from 'chart.js'
 
+/**
+ * Komponente welche den Wertverlauf einer Aktie anzeigt. Die gezeigt Aktie hängt vom übergebenem Input-Parameter 'symbol' ab.
+ */
 @Component({
   selector: 'app-stock',
   templateUrl: './stock.component.html',

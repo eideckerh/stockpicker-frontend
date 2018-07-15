@@ -5,6 +5,9 @@ import {AuthService} from "../core/auth/auth.service";
 import {MatDialog} from "@angular/material";
 import {MessageboxComponent} from "../core/messagebox/messagebox.component";
 
+/**
+ * Komponente für die Registrierung einen neuen Benutzers
+ */
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -30,6 +33,9 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  /**
+   * Logik für das Ausführen der Registrierung (Backend-Call)
+   */
   onSubmit() {
     if (this.form.valid) {
       this.authService.register(this.form.value).subscribe(value => {

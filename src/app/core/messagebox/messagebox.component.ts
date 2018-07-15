@@ -1,6 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 
+/**
+ * Abstrakte Komponente für Modale-Dialoge, die den Benutzer über Ereignisse benachrichtigen sollen.
+ */
 @Component({
   selector: 'app-messagebox',
   templateUrl: './messagebox.component.html',

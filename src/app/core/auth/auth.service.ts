@@ -6,10 +6,17 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs/internal/Observable";
 import {map} from "rxjs/operators";
 
+/**
+ * Service für die Authentifizierung von Benutzern
+ */
 @Injectable()
 export class AuthService {
   private loggedInUser = new BehaviorSubject<User>(undefined);
 
+  /**
+   * Gibt ein Observable auf den aktuell eingeloggten Benutzer zurück.
+   * @returns {Observable<User>}
+   */
   get getLoggedInUser() {
     return this.loggedInUser.asObservable();
   }
@@ -20,6 +27,11 @@ export class AuthService {
   ) {
   }
 
+  /**
+   * Servicecall für die Registrierung eines neuen Benutzers
+   * @param {User} user
+   * @returns {Observable<User>}
+   */
   register(user: User): Observable<User> {
     return this.http.post('/register', user).pipe(map((res: User) => {
       return res;
@@ -27,12 +39,20 @@ export class AuthService {
     //.map((res: Response) => res.status == 204
   }
 
+  /**
+   * Servicecall um den aktuellen Kontostand eines Benutzers abzufragen
+   * @returns {Observable<number>}
+   */
   getBalance(): Observable<number> {
     return this.http.get('/account/balance').pipe(
       map((value: number) => value)
     )
   }
 
+  /**
+   * Servicecall um einen Benutzer mit den übergebenen Credentials einzuloggen
+   * @param {User} user
+   */
   login(user: User) {
     if (user.username !== '' && user.password != '') {
       let headers = new HttpHeaders({
@@ -52,6 +72,9 @@ export class AuthService {
     }
   }
 
+  /**
+   * Logout des Benutzers
+   */
   logout() {
     this.loggedInUser.next(undefined);
     this.router.navigate(['/login']);

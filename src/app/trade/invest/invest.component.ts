@@ -7,6 +7,9 @@ import {MatDialog} from "@angular/material";
 import {MessageboxComponent} from "../../core/messagebox/messagebox.component";
 import {StockService} from "../../stock/stock.service";
 
+/**
+ * Komponente für den Kauf und Verkauf von Aktien
+ */
 @Component({
   selector: 'app-invest',
   templateUrl: './invest.component.html',

@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../core/auth/auth.service";
 
+/**
+ * Komponente für die Navigationsleiste der Anwendung
+ */
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',

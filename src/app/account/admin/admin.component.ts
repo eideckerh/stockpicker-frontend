@@ -4,6 +4,10 @@ import {User} from "../../user/model/user";
 import {MatDialog, MatSelectChange, MatTable, MatTableDataSource} from "@angular/material";
 import {MessageboxComponent} from "../../core/messagebox/messagebox.component";
 
+
+/**
+ * Komponente für eine Tabellenübersicht über alle vorhandenen Benutzer und deren verwaltung.
+ */
 @Component({
   selector: "app-admin",
   templateUrl: "./admin.component.html",
@@ -19,6 +23,10 @@ export class AdminComponent implements OnInit {
   constructor(private userService: UserService, private dialog: MatDialog) {
   }
 
+
+  /**
+   * Initialisiert die Komponente mit Daten (Service-Call an das Backend)
+   */
   ngOnInit() {
     this.userService.getAll().subscribe(value => {
         this.dataSource = new MatTableDataSource<User>(value);
@@ -28,6 +36,10 @@ export class AdminComponent implements OnInit {
       });
   }
 
+  /**
+   * Löschlogik für das onDelete Event. Backend-Call zum löschen wird aufgerufen
+   * @param {User} user
+   */
   onDeleteUser(user: User) {
     this.userService.delete(user.id).subscribe(res => {
         let item = this.dataSource.data.find(item => item.id === user.id);
@@ -39,17 +51,31 @@ export class AdminComponent implements OnInit {
       });
   }
 
+  /**
+   * Aktiviert einen Benutzer und sendent einen Backendcall um den Benutzer zu aktualisieren
+   * @param {MatSelectChange} event
+   * @param {User} source
+   */
   onToggleActive(event: MatSelectChange, source: User) {
     source.active = event.value;
     this.updateUser(source);
   }
 
-
+  /**
+   * Ändert die Rolle eines Benutzers und sendet einen BackendCall um den Benutzer zu aktualisieren
+   * @param {MatSelectChange} event
+   * @param {User} source
+   */
   onToggleRole(event: MatSelectChange, source: User) {
     source.role = (event.value);
     this.updateUser(source);
   }
 
+  /**
+   * Prüft ob der übergebene Benutzer die Rolle ADMIN hat
+   * @param {User} user
+   * @returns {boolean}
+   */
   isAdmin(user: User): boolean {
     return user.role === "ADMIN";
   }

@@ -5,7 +5,9 @@ import {Symbol} from "./model/symbol";
 import {Observable} from "rxjs/internal/Observable";
 import {map, shareReplay} from "rxjs/operators";
 
-
+/**
+ * Service welche die Daten für Aktien vom Backend abfragt
+ */
 @Injectable()
 export class StockService {
   private url: string = "/stock";

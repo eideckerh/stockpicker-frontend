@@ -5,6 +5,10 @@ import {TradeService} from "../../trade/trade.service";
 import {MessageboxComponent} from "../../core/messagebox/messagebox.component";
 import {StockService} from "../../stock/stock.service";
 
+
+/**
+ * Komponente für die Übersicht aller Trades
+ */
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.component.html',
@@ -21,6 +25,9 @@ export class OverviewComponent implements OnInit {
 
   }
 
+  /**
+   * Initialisiert die Komponente mit den Trade-Daten (Backend-Call)
+   */
   ngOnInit() {
     this.tradeService.getOpenTrades().subscribe(values => {
         values.forEach(value => this.addPriceToTrade(value));
@@ -39,6 +46,9 @@ export class OverviewComponent implements OnInit {
     );
   }
 
+  /**
+   * Läd ein generiertes PDF herunter, welches die Statistiken der abgeschlossenen Trades enthält
+   */
   onDownloadStatistic() {
     let link = document.createElement('a');
     let blob;
@@ -57,6 +67,10 @@ export class OverviewComponent implements OnInit {
 
   }
 
+  /**
+   * Ermittelt den Gesamtwert der aktuellen Positionen
+   * @returns {number}
+   */
   getTotalCurrentValue() {
     let totalCurrentValue = 0;
     this.dataSource.data.forEach(trade => {
@@ -65,6 +79,10 @@ export class OverviewComponent implements OnInit {
     return totalCurrentValue;
   }
 
+  /**
+   * Ermittelt den Gesamtwert der Positionen zum Zeitpunkt des Kaufes.
+   * @returns {number}
+   */
   getTotalOpenValue() {
     let totalOpenValue = 0;
     this.dataSource.data.forEach(trade => {
@@ -73,10 +91,18 @@ export class OverviewComponent implements OnInit {
     return totalOpenValue;
   }
 
+  /**
+   * Ermittelt den gesamten Profit
+   * @returns {number}
+   */
   getTotalProfit() {
     return this.getTotalCurrentValue() - this.getTotalOpenValue();
   }
 
+  /**
+   * Ermittelt den gesamten Profit in Prozent
+   * @returns {number}
+   */
   getTotalProfitPercentage() {
     return (this.getTotalCurrentValue() / this.getTotalOpenValue() - 1) * 100
   }

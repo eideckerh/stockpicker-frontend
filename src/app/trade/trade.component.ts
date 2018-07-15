@@ -6,6 +6,9 @@ import {map, startWith} from "rxjs/operators";
 import {Symbol} from "../stock/model/symbol";
 import {MatOptionSelectionChange} from "@angular/material";
 
+/**
+ * Komponente welche die Aktienübersicht für den Handel von Aktien kapselt.
+ */
 @Component({
   selector: 'app-trade',
   templateUrl: './trade.component.html',
@@ -31,7 +34,7 @@ export class TradeComponent implements OnInit {
     );
     this.stockService.getTrendingSymbols().subscribe(symbolStats => {
       console.log(symbolStats),
-      this.favoriteStockSymbols = symbolStats
+        this.favoriteStockSymbols = symbolStats
     })
   }
 

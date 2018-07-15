@@ -3,6 +3,9 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../core/auth/auth.service";
 import {Router} from "@angular/router";
 
+/**
+ * Login-Komponente der Anwendung
+ */
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
@@ -24,6 +27,9 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  /***
+   * Logik welche beim betätigen des Loginbuttons ausgeführt wird
+   */
   onSubmit() {
     if (this.form.valid) {
       this.authService.login(this.form.value);

@@ -2,6 +2,10 @@ import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {Chart} from 'chart.js'
 import {TradeService} from "../../trade/trade.service";
 
+
+/**
+ * Komponente zur Darstellung der Portfolio-Zusammensetzung als Diagramm
+ */
 @Component({
   selector: 'app-portfolio',
   templateUrl: './portfolio.component.html',
@@ -23,6 +27,9 @@ export class PortfolioComponent implements OnInit {
   }
 
 
+  /**
+   * Initiale Ermittlung der Daten für das Diagramm
+   */
   ngOnInit() {
     this.tradeService.getOpenTrades().subscribe(trades => {
       trades.forEach(trade => {
@@ -37,6 +44,11 @@ export class PortfolioComponent implements OnInit {
     })
   }
 
+  /**
+   * Logik zur generierung von passenden Farben des Diagramms (Frabpalette passend zum Design)
+   * @param {number} length
+   * @returns {string[]}
+   */
   generateColors(length: number): string[] {
     let colorCopy = this.colors.slice();
     let returnColors = [];
