@@ -6,6 +6,10 @@ The Framework used for development is [Angular Version 6](https://angular.io/).
 
 Charts are based on [Chart.js](https://github.com/chartjs/Chart.js).
   
+## Installing requirements
+
+1. Install NPM and node.js:  https://nodejs.org/en/download/
+2. Install Angular CLI globally: npm install -g @angular/cli
 
 ## Development server
 
